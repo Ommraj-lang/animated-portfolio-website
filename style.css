@@ -175,6 +175,16 @@ body {
   color: var(--accent-purple);
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
   animation: pulseCode 1.8s ease-in-out infinite alternate;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.loader-code-badge img,
+.loader-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 @keyframes pulseCode {
@@ -250,8 +260,22 @@ body {
 .brand-logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   text-decoration: none;
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 44px;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  transition: transform var(--transition-fast);
+}
+
+.brand-logo:hover .brand-logo-img {
+  transform: scale(1.05);
 }
 
 .brand-brackets {
@@ -1266,6 +1290,28 @@ body {
   color: var(--text-dim);
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.footer-logo-img {
+  height: 28px;
+  width: auto;
+  max-width: 36px;
+  object-fit: contain;
+  display: block;
+  border-radius: 6px;
+}
+
+.footer-brand-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
 }
 
 .heart {
