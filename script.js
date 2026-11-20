@@ -1,5 +1,5 @@
 /**
- * CodeCraft - Smooth Scroll Frame Animation & Interactive Portfolio Engine
+ * Ommraj - Smooth Scroll Frame Animation & Interactive Portfolio Engine
  * - Apple-grade canvas video frame scrubbing with LERP momentum physics
  * - Dynamic skill progress bar animations on viewport intersection
  * - Active navigation tracker & mobile drawer
