@@ -57,10 +57,21 @@
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
 
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Momentum Scroll CDN -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <!-- Custom Magnetic Cursor Follower -->
+  <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
   <!-- Top Scroll Progress Line -->
   <div class="scroll-progress-line" id="progressBar" aria-hidden="true"></div>
@@ -103,6 +114,14 @@
       </ul>
 
       <div class="nav-actions">
+        <button class="btn-cmd-palette" id="openCmdPaletteBtn" aria-label="Open Command Palette (Ctrl+K)" title="Command Palette (Ctrl + K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="cmd-pill-badge"><kbd>Ctrl</kbd> <kbd>K</kbd></span>
+        </button>
+
         <button class="btn-hire" id="openHireModalBtn">
           <span>Hire Me</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -122,6 +141,13 @@
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer" id="mobileDrawer">
+    <button class="btn-cmd-palette mobile-cmd-btn" id="mobileCmdPaletteBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <span>Command Palette (Ctrl + K)</span>
+    </button>
     <ul class="mobile-nav-links">
       <li><a href="#hero" class="mobile-link">Home</a></li>
       <li><a href="#about" class="mobile-link">About</a></li>
@@ -251,22 +277,36 @@
           <div class="stage-portal-glow"></div>
           <div class="dots-grid-pattern"></div>
 
-          <!-- Floating Code Card -->
-          <div class="floating-code-card">
+          <!-- Floating Code Card (Interactive with typing effect & run controls) -->
+          <div class="floating-code-card" id="heroCodeCard">
             <div class="code-card-header">
+              <div class="code-card-controls" aria-hidden="true">
+                <span class="dot-ctrl dot-red"></span>
+                <span class="dot-ctrl dot-yellow"></span>
+                <span class="dot-ctrl dot-green"></span>
+              </div>
               <div class="code-badge-title">
                 <span class="code-bracket-icon">&lt;/&gt;</span>
-                <span>Code</span>
+                <span class="code-filename">rajverse.ts</span>
               </div>
-              <div class="code-status-dot"></div>
+              <div class="code-card-actions">
+                <button class="code-run-btn" id="runCodeBtn" title="Run code execution simulation">
+                  <span class="run-icon">▶</span>
+                  <span>Run</span>
+                </button>
+              </div>
             </div>
-            <pre class="code-card-body"><code><span class="tok-kw">const</span> <span class="tok-var">developer</span> = {
-  <span class="tok-key">name</span>: <span class="tok-str">"Ommraj"</span>,
-  <span class="tok-key">skills</span>: [<span class="tok-str">"HTML"</span>, <span class="tok-str">"CSS"</span>,
-    <span class="tok-str">"JavaScript"</span>, <span class="tok-str">"React"</span>],
-  <span class="tok-key">passion</span>: <span class="tok-str">"Building things
-    for the web"</span>
+            <pre class="code-card-body"><code id="codeTypeTarget"><span class="tok-kw">const</span> <span class="tok-var">developer</span> = {
+  <span class="tok-key">name</span>: <span class="tok-str">"Ommraj Nayak"</span>,
+  <span class="tok-key">role</span>: <span class="tok-str">"Full-Stack Web Dev"</span>,
+  <span class="tok-key">ecosystem</span>: <span class="tok-str">"RajVerse"</span>,
+  <span class="tok-key">skills</span>: [<span class="tok-str">"React"</span>, <span class="tok-str">"TS"</span>, <span class="tok-str">"Node"</span>, <span class="tok-str">"PWA"</span>],
+  <span class="tok-key">passion</span>: <span class="tok-str">"Crafting digital experiences"</span>
 };</code></pre>
+            <div class="code-terminal-output" id="codeTerminalOutput" aria-live="polite">
+              <span class="term-prompt">❯</span>
+              <span class="term-text">Click "Run" to test environment</span>
+            </div>
           </div>
 
           <!-- Hand-drawn vector doodle curve -->
@@ -372,139 +412,157 @@
       </div>
     </section>
 
-    <!-- 3. SKILLS SECTION -->
+    <!-- 3. SKILLS SECTION (Bento Tech Stack Grid + Dual-Row Marquee) -->
     <section class="section-container skills-section" id="skills">
       <div class="section-header-center">
         <div class="section-tag-badge">
-          <span>MY SKILLS</span>
+          <span>TECH STACK &amp; CAPABILITIES</span>
         </div>
-        <h2 class="section-title">Technologies I'm Learning</h2>
+        <h2 class="section-title">Tools &amp; Engineering Toolkit</h2>
+        <p class="section-subtitle">A modern bento overview of my frontend systems, backend services, and offline-first tech stack.</p>
       </div>
 
-      <div class="skills-grid">
-        <!-- Skill 1: HTML -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-orange">E</span>
-              <span class="skill-name">HTML</span>
+      <!-- Modern Bento Tech Stack Grid -->
+      <div class="bento-skills-grid">
+        <!-- Bento 1: Frontend & Reactive UI (Spans 2 cols) -->
+        <div class="bento-card bento-span-2">
+          <div class="bento-card-spotlight"></div>
+          <div class="bento-top">
+            <div class="bento-icon-box box-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
             </div>
-            <span class="skill-percent">Intermediate</span>
+            <span class="bento-tag">Frontend &amp; UI Systems</span>
           </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="60%"></div>
+          <h3 class="bento-heading">Reactive Frontend &amp; Interactive Applications</h3>
+          <p class="bento-description">Building responsive, accessible web applications and component systems with clean state management, modular architecture, and micro-interactions.</p>
+          <div class="bento-badges-row">
+            <span class="bento-tech-pill"><span class="pill-dot color-cyan"></span>React.js</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-white"></span>Next.js</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-yellow"></span>JavaScript (ES6+)</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-blue-deep"></span>TypeScript</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-teal"></span>Tailwind CSS</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-orange"></span>HTML5 / CSS3</span>
           </div>
         </div>
 
-        <!-- Skill 2: React.js -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-cyan">⚛</span>
-              <span class="skill-name">React.js</span>
+        <!-- Bento 2: Backend & APIs (Spans 1 col) -->
+        <div class="bento-card">
+          <div class="bento-card-spotlight"></div>
+          <div class="bento-top">
+            <div class="bento-icon-box box-green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
             </div>
-            <span class="skill-percent">Intermediate</span>
+            <span class="bento-tag">Backend &amp; Services</span>
           </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="60%"></div>
+          <h3 class="bento-heading">Server &amp; REST APIs</h3>
+          <p class="bento-description">Developing lightweight Node.js backends, RESTful endpoints, and edge deployments on Vercel.</p>
+          <div class="bento-badges-row">
+            <span class="bento-tech-pill"><span class="pill-dot color-green"></span>Node.js</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-blue"></span>RESTful APIs</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-purple"></span>Serverless Hosting</span>
           </div>
         </div>
 
-        <!-- Skill 3: Node.js -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-green">⬡</span>
-              <span class="skill-name">Node.js</span>
+        <!-- Bento 3: Offline-First & Storage Architecture (Spans 1 col) -->
+        <div class="bento-card">
+          <div class="bento-card-spotlight"></div>
+          <div class="bento-top">
+            <div class="bento-icon-box box-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
             </div>
-            <span class="skill-percent">Learning</span>
+            <span class="bento-tag">Offline-First Tech</span>
           </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="20%"></div>
+          <h3 class="bento-heading">Client Storage &amp; PWA</h3>
+          <p class="bento-description">Zero-latency, 100% offline-ready web apps with persistent localStorage synchronization and PWA caching.</p>
+          <div class="bento-badges-row">
+            <span class="bento-tech-pill"><span class="pill-dot color-green"></span>PWA Offline</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-purple"></span>LocalStorage</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-cyan"></span>Cache Sync</span>
           </div>
         </div>
 
-        <!-- Skill 4: CSS -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-blue">3</span>
-              <span class="skill-name">CSS</span>
+        <!-- Bento 4: Tooling & Workflow (Spans 2 cols) -->
+        <div class="bento-card bento-span-2">
+          <div class="bento-card-spotlight"></div>
+          <div class="bento-top">
+            <div class="bento-icon-box box-indigo">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
             </div>
-            <span class="skill-percent">Intermediate</span>
+            <span class="bento-tag">Workflow &amp; Tooling</span>
           </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="60%"></div>
+          <h3 class="bento-heading">Development Workflow &amp; Performance Engineering</h3>
+          <p class="bento-description">Rapid iteration with modern bundlers, Git version control, browser profiling, and responsive cross-device testing.</p>
+          <div class="bento-badges-row">
+            <span class="bento-tech-pill"><span class="pill-dot color-red"></span>Git &amp; GitHub</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-purple"></span>Vite</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-cyan"></span>Chrome DevTools</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-blue"></span>Responsive Layouts</span>
+            <span class="bento-tech-pill"><span class="pill-dot color-orange"></span>Figma-to-Code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Infinite Dual-Row Tech Marquee -->
+      <div class="tech-marquee-wrapper" aria-label="Tech Stack Scrolling Marquee">
+        <div class="marquee-track marquee-track-left">
+          <div class="marquee-content">
+            <span class="marquee-pill">⚛ React.js</span>
+            <span class="marquee-pill">⚡ Next.js</span>
+            <span class="marquee-pill">📘 TypeScript</span>
+            <span class="marquee-pill">🎨 Tailwind CSS</span>
+            <span class="marquee-pill">🌐 JavaScript ES6+</span>
+            <span class="marquee-pill">📱 Offline PWA</span>
+            <span class="marquee-pill">🚀 Vite Bundler</span>
+            <span class="marquee-pill">🔥 Git &amp; GitHub</span>
+          </div>
+          <div class="marquee-content" aria-hidden="true">
+            <span class="marquee-pill">⚛ React.js</span>
+            <span class="marquee-pill">⚡ Next.js</span>
+            <span class="marquee-pill">📘 TypeScript</span>
+            <span class="marquee-pill">🎨 Tailwind CSS</span>
+            <span class="marquee-pill">🌐 JavaScript ES6+</span>
+            <span class="marquee-pill">📱 Offline PWA</span>
+            <span class="marquee-pill">🚀 Vite Bundler</span>
+            <span class="marquee-pill">🔥 Git &amp; GitHub</span>
           </div>
         </div>
 
-        <!-- Skill 5: Next.js -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-white">N</span>
-              <span class="skill-name">Next.js</span>
-            </div>
-            <span class="skill-percent">Learning</span>
+        <div class="marquee-track marquee-track-right">
+          <div class="marquee-content">
+            <span class="marquee-pill">🟢 Node.js</span>
+            <span class="marquee-pill">🔄 LocalStorage Sync</span>
+            <span class="marquee-pill">🏥 Healthcare UI</span>
+            <span class="marquee-pill">📋 Kanban Architecture</span>
+            <span class="marquee-pill">⏱ Pomodoro Focus</span>
+            <span class="marquee-pill">💪 Progressive Overload</span>
+            <span class="marquee-pill">🤖 Robotics Tech</span>
+            <span class="marquee-pill">🌌 RajVerse Ecosystem</span>
           </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="20%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 6: Tailwind CSS -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-teal">≈</span>
-              <span class="skill-name">Tailwind CSS</span>
-            </div>
-            <span class="skill-percent">Learning</span>
-          </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="20%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 7: JavaScript -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-yellow">JS</span>
-              <span class="skill-name">JavaScript</span>
-            </div>
-            <span class="skill-percent">Intermediate</span>
-          </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="60%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 8: TypeScript -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-blue-deep">TS</span>
-              <span class="skill-name">TypeScript</span>
-            </div>
-            <span class="skill-percent">Learning</span>
-          </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="20%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 9: Git -->
-        <div class="skill-item">
-          <div class="skill-top">
-            <div class="skill-label-group">
-              <span class="skill-icon-badge color-red">◆</span>
-              <span class="skill-name">Git</span>
-            </div>
-            <span class="skill-percent">Intermediate</span>
-          </div>
-          <div class="skill-track">
-            <div class="skill-fill" data-progress="60%"></div>
+          <div class="marquee-content" aria-hidden="true">
+            <span class="marquee-pill">🟢 Node.js</span>
+            <span class="marquee-pill">🔄 LocalStorage Sync</span>
+            <span class="marquee-pill">🏥 Healthcare UI</span>
+            <span class="marquee-pill">📋 Kanban Architecture</span>
+            <span class="marquee-pill">⏱ Pomodoro Focus</span>
+            <span class="marquee-pill">💪 Progressive Overload</span>
+            <span class="marquee-pill">🤖 Robotics Tech</span>
+            <span class="marquee-pill">🌌 RajVerse Ecosystem</span>
           </div>
         </div>
       </div>
@@ -521,7 +579,8 @@
 
       <div class="projects-grid-3 projects-grid-4">
         <!-- Project 01: Swasthya Setu Maa -->
-        <article class="project-card">
+        <article class="project-card" data-project-id="swasthya">
+          <div class="project-card-spotlight"></div>
           <div class="project-num-badge">01</div>
           <div class="project-ecosystem-tag">by RajVerse</div>
           <div class="project-img-box">
@@ -546,6 +605,13 @@
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
               </a>
+              <button class="project-quick-view-btn" data-project="swasthya" title="Quick View Case Study">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Details</span>
+              </button>
               <a href="https://github.com/Ommraj-lang" target="_blank" rel="noopener noreferrer"
                 class="project-link project-link-code" title="View Source on GitHub">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -559,7 +625,8 @@
         </article>
 
         <!-- Project 02: RajFit — Offline Workout Tracker -->
-        <article class="project-card">
+        <article class="project-card" data-project-id="rajfit">
+          <div class="project-card-spotlight"></div>
           <div class="project-num-badge">02</div>
           <div class="project-ecosystem-tag">by RajVerse</div>
           <div class="project-img-box">
@@ -584,6 +651,13 @@
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
               </a>
+              <button class="project-quick-view-btn" data-project="rajfit" title="Quick View Case Study">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Details</span>
+              </button>
               <a href="https://github.com/Ommraj-lang/rajverse-fit" target="_blank" rel="noopener noreferrer"
                 class="project-link project-link-code" title="View Source on GitHub">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -597,7 +671,8 @@
         </article>
 
         <!-- Project 03: Quantum Robotics -->
-        <article class="project-card">
+        <article class="project-card" data-project-id="robotics">
+          <div class="project-card-spotlight"></div>
           <div class="project-num-badge">03</div>
           <div class="project-ecosystem-tag">by RajVerse</div>
           <div class="project-img-box">
@@ -621,6 +696,13 @@
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
               </a>
+              <button class="project-quick-view-btn" data-project="robotics" title="Quick View Case Study">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Details</span>
+              </button>
               <a href="https://github.com/Ommraj-lang" target="_blank" rel="noopener noreferrer"
                 class="project-link project-link-code" title="View Source on GitHub">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -634,7 +716,8 @@
         </article>
 
         <!-- Project 04: RajVerse Sync — Smart Task & Kanban Dashboard -->
-        <article class="project-card">
+        <article class="project-card" data-project-id="rajsync">
+          <div class="project-card-spotlight"></div>
           <div class="project-num-badge">04</div>
           <div class="project-ecosystem-tag">by RajVerse</div>
           <div class="project-img-box">
@@ -659,6 +742,13 @@
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
               </a>
+              <button class="project-quick-view-btn" data-project="rajsync" title="Quick View Case Study">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Details</span>
+              </button>
               <a href="https://github.com/Ommraj-lang/rajverse-sync" target="_blank" rel="noopener noreferrer"
                 class="project-link project-link-code" title="View Source on GitHub">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -796,6 +886,133 @@
         </button>
         <div class="form-feedback" id="modalFeedback"></div>
       </form>
+    </div>
+  </div>
+
+  <!-- Terminal Command Palette Modal (Ctrl + K) -->
+  <div class="cmd-modal-backdrop" id="cmdPaletteModal" aria-hidden="true">
+    <div class="cmd-palette-dialog">
+      <div class="cmd-input-header">
+        <svg class="cmd-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="cmdInput" class="cmd-search-input" placeholder="Type a command or jump to... (e.g. projects, skills, hire, whoami)" autocomplete="off" spellcheck="false">
+        <button class="cmd-close-btn" id="closeCmdPaletteBtn" aria-label="Close command palette">ESC</button>
+      </div>
+      <div class="cmd-body">
+        <div class="cmd-section-label">COMMANDS &amp; QUICK NAVIGATION</div>
+        <ul class="cmd-list" id="cmdList">
+          <li class="cmd-item" data-action="nav" data-target="#projects" tabindex="0">
+            <span class="cmd-icon">🚀</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">Featured Projects &amp; Apps</span>
+              <span class="cmd-sub">Explore RajFit, RajVerse Sync, Swasthya Setu Maa, Quantum Robotics</span>
+            </div>
+            <kbd class="cmd-jump-key">↵</kbd>
+          </li>
+          <li class="cmd-item" data-action="nav" data-target="#skills" tabindex="0">
+            <span class="cmd-icon">⚡</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">Tech Stack &amp; Architecture</span>
+              <span class="cmd-sub">Bento engineering capabilities, React, TypeScript, PWA</span>
+            </div>
+            <kbd class="cmd-jump-key">↵</kbd>
+          </li>
+          <li class="cmd-item" data-action="nav" data-target="#about" tabindex="0">
+            <span class="cmd-icon">👨‍💻</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">About Ommraj</span>
+              <span class="cmd-sub">Bio, experience, and development passion</span>
+            </div>
+            <kbd class="cmd-jump-key">↵</kbd>
+          </li>
+          <li class="cmd-item" data-action="modal" data-target="hire" tabindex="0">
+            <span class="cmd-icon">💼</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">Hire Me / Get in Touch</span>
+              <span class="cmd-sub">Open project inquiry and collaboration form</span>
+            </div>
+            <kbd class="cmd-jump-key">↵</kbd>
+          </li>
+          <li class="cmd-item" data-action="external" data-target="https://github.com/Ommraj-lang" tabindex="0">
+            <span class="cmd-icon">🐙</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">GitHub Profile</span>
+              <span class="cmd-sub">Visit @Ommraj-lang repositories and open source</span>
+            </div>
+            <kbd class="cmd-jump-key">↗</kbd>
+          </li>
+          <li class="cmd-item" data-action="term" data-cmd="whoami" tabindex="0">
+            <span class="cmd-icon">💻</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">whoami</span>
+              <span class="cmd-sub">Print developer identity and RajVerse credentials</span>
+            </div>
+            <kbd class="cmd-jump-key">run</kbd>
+          </li>
+        </ul>
+        <div class="cmd-terminal-panel" id="cmdTerminalPanel" style="display: none;">
+          <div class="cmd-terminal-output" id="cmdTerminalOutput"></div>
+        </div>
+      </div>
+      <div class="cmd-footer">
+        <span class="cmd-hint"><span>↑↓</span> Navigate</span>
+        <span class="cmd-hint"><span>↵</span> Select</span>
+        <span class="cmd-hint"><span>ESC</span> Dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Project Case-Study Quick View Modal -->
+  <div class="project-modal-backdrop" id="projectQuickViewModal" aria-hidden="true">
+    <div class="project-modal-dialog">
+      <button class="modal-close-btn" id="closeProjectModalBtn" aria-label="Close project modal">&times;</button>
+      <div class="project-modal-hero">
+        <img src="assets/project_gym.png" alt="Project Preview" id="projectModalImg" class="project-modal-img">
+        <div class="project-modal-badge-group">
+          <span class="project-modal-num" id="projectModalNum">01</span>
+          <span class="project-modal-badge" id="projectModalBadge">by RajVerse</span>
+        </div>
+      </div>
+      <div class="project-modal-content">
+        <div class="project-modal-header-row">
+          <div>
+            <h2 class="project-modal-title" id="projectModalTitle">RajFit — Offline Workout Tracker</h2>
+            <p class="project-modal-tagline" id="projectModalTagline">FitNotes-style progressive overload tracking &amp; 100% offline-first PWA</p>
+          </div>
+        </div>
+        
+        <div class="project-modal-section">
+          <h4 class="project-modal-sec-title">Key Capabilities &amp; Architecture</h4>
+          <ul class="project-modal-features" id="projectModalFeatures">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </div>
+
+        <div class="project-modal-section">
+          <h4 class="project-modal-sec-title">Technologies Used</h4>
+          <div class="project-tech-stack" id="projectModalStack">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <div class="project-modal-actions">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="projectModalLiveBtn">
+            <span>Launch Live App</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary" id="projectModalRepoBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            <span>GitHub Repository</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
