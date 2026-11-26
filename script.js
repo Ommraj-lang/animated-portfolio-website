@@ -726,7 +726,7 @@
 
     // Magnetic pull effect on primary buttons and social circles
     const magneticBtns = document.querySelectorAll(
-      '.btn-primary, .btn-hire, .btn-secondary, .social-circle, .btn-cmd-palette, .project-quick-view-btn'
+      '.btn-primary, .btn-hire, .btn-secondary, .btn-nav-cv, .social-circle, .btn-cmd-palette, .project-quick-view-btn'
     );
 
     magneticBtns.forEach((btn) => {
@@ -1045,6 +1045,13 @@
           mobileDrawer.classList.remove('open');
         });
       });
+
+      const mobileCvBtn = document.querySelector('.mobile-cv-btn');
+      if (mobileCvBtn) {
+        mobileCvBtn.addEventListener('click', () => {
+          mobileDrawer.classList.remove('open');
+        });
+      }
     }
 
     // Hire Modal Open & Close

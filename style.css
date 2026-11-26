@@ -463,6 +463,43 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.btn-nav-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.52rem 0.95rem;
+  background: rgba(129, 140, 248, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.32);
+  border-radius: 9px;
+  color: #c7d2fe;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.12);
+}
+
+.btn-nav-cv svg {
+  color: #818cf8;
+  transition: transform var(--transition-fast);
+}
+
+.btn-nav-cv:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(129, 140, 248, 0.65);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-nav-cv:hover svg {
+  transform: translateY(1.5px);
+  color: #a5b4fc;
+}
+
 .btn-hire {
   display: inline-flex;
   align-items: center;
@@ -542,6 +579,21 @@ body {
   font-weight: 600;
   color: var(--text-muted);
   text-decoration: none;
+}
+
+.mobile-drawer-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.mobile-hire-btn,
+.mobile-cta-btn,
+.mobile-cv-btn {
+  width: 100%;
+  justify-content: center;
 }
 
 /* ==========================================================================
@@ -694,6 +746,29 @@ body {
   background: rgba(255, 255, 255, 0.09);
   border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-2px);
+}
+
+.btn-hero-cv {
+  border-color: rgba(129, 140, 248, 0.32);
+  background: rgba(99, 102, 241, 0.09);
+  color: #e0e7ff;
+}
+
+.btn-hero-cv svg {
+  color: #818cf8;
+  transition: transform var(--transition-fast);
+}
+
+.btn-hero-cv:hover {
+  border-color: rgba(129, 140, 248, 0.65);
+  background: rgba(99, 102, 241, 0.18);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(99, 102, 241, 0.3);
+}
+
+.btn-hero-cv:hover svg {
+  transform: translateY(2px);
+  color: #c7d2fe;
 }
 
 /* ==========================================================================
@@ -2415,6 +2490,32 @@ body {
   }
   .project-actions {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 580px) {
+  .navbar .btn-cmd-palette {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 1.25rem;
+  }
+  .btn-nav-cv {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100%;
+    justify-content: center;
   }
 }
 

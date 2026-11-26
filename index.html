@@ -122,6 +122,15 @@
           <span class="cmd-pill-badge"><kbd>Ctrl</kbd> <kbd>K</kbd></span>
         </button>
 
+        <a href="./assets/Ommraj_Nayak_CV.pdf" target="_blank" rel="noopener noreferrer" download="Ommraj_Nayak_CV.pdf" class="btn-nav-cv" aria-label="Download CV" title="Download CV (PDF)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>CV</span>
+        </a>
+
         <button class="btn-hire" id="openHireModalBtn">
           <span>Hire Me</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -155,7 +164,17 @@
       <li><a href="#projects" class="mobile-link">Projects</a></li>
       <li><a href="#contact-block" class="mobile-link">Contact</a></li>
     </ul>
-    <button class="btn-primary mobile-cta-btn" id="mobileHireBtn">Hire Me ↗</button>
+    <div class="mobile-drawer-cta-group">
+      <a href="./assets/Ommraj_Nayak_CV.pdf" target="_blank" rel="noopener noreferrer" download="Ommraj_Nayak_CV.pdf" class="btn-secondary mobile-cv-btn" aria-label="Download CV">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download CV</span>
+      </a>
+      <button class="btn-primary mobile-cta-btn" id="mobileHireBtn">Hire Me ↗</button>
+    </div>
   </div>
 
   <!-- Scroll Prompt Hint -->
@@ -195,6 +214,15 @@
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
+            </a>
+
+            <a href="./assets/Ommraj_Nayak_CV.pdf" target="_blank" rel="noopener noreferrer" download="Ommraj_Nayak_CV.pdf" class="btn-secondary btn-hero-cv" aria-label="Download CV">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download CV</span>
             </a>
 
             <button class="btn-secondary" id="heroContactBtn" aria-label="Contact Me">
@@ -934,6 +962,14 @@
               <span class="cmd-sub">Open project inquiry and collaboration form</span>
             </div>
             <kbd class="cmd-jump-key">↵</kbd>
+          </li>
+          <li class="cmd-item" data-action="external" data-target="./assets/Ommraj_Nayak_CV.pdf" data-cmd="cv resume download" tabindex="0">
+            <span class="cmd-icon">📄</span>
+            <div class="cmd-item-text">
+              <span class="cmd-title">Download CV / Resume</span>
+              <span class="cmd-sub">Open or download official CV (PDF)</span>
+            </div>
+            <kbd class="cmd-jump-key">PDF</kbd>
           </li>
           <li class="cmd-item" data-action="external" data-target="https://github.com/Ommraj-lang" tabindex="0">
             <span class="cmd-icon">🐙</span>
